@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstroSolve Nexus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Astrophysics Workspace</p>
+        <h1>AstroSolve Nexus</h1>
+        <p class="lead">
+          Inserisci i dati osservativi, definisci le incognite e lascia che il bot risolva
+          problemi di orbite, transiti, fotometria, magnitudini, redshift e dinamica gravitazionale.
+        </p>
+      </div>
+      <div class="hero-badge">
+        <span>Andrea Di Silvestro</span>
+        <strong>Oltre 90 relazioni fisiche</strong>
+        <small>Costanti incluse</small>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel panel-wide">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Input Lab</p>
+            <h2>Dati noti e incognite</h2>
+          </div>
+          <button id="loadDemoBtn" class="secondary-button">Carica esempio</button>
+        </div>
+
+        <div class="tables-grid">
+          <div class="table-card">
+            <div class="card-header">
+              <h3>Dati inseriti</h3>
+              <button id="addKnownBtn" class="icon-button" title="Aggiungi dato">+</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variabile</th>
+                  <th>Valore o espressione</th>
+                  <th>Unità</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="knownTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-card">
+            <div class="card-header">
+              <h3>Incognite</h3>
+              <button id="addUnknownBtn" class="icon-button" title="Aggiungi incognita">+</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variabile</th>
+                  <th>Unità attesa</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="unknownTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="hint-row">
+          <p class="hint-intro">Valori accettati anche come formule: <code>1*2</code>, <code>2*pi*60</code>, <code>3*10^8</code>.</p>
+          <div class="legend-grid">
+            <div class="legend-card">
+              <h3>Dati e Incognite</h3>
+              <div class="legend-list">
+                <div><span>Luminosita</span><code>L</code></div>
+                <div><span>Flusso radiativo</span><code>F</code></div>
+                <div><span>Flusso 1</span><code>F1</code></div>
+                <div><span>Flusso 2</span><code>F2</code></div>
+                <div><span>Distanza</span><code>d</code></div>
+                <div><span>Temperatura</span><code>T</code></div>
+                <div><span>Magnitudine apparente</span><code>m</code></div>
+                <div><span>Magnitudine assoluta</span><code>M</code></div>
+                <div><span>Magnitudine integrata</span><code>m_int</code></div>
+                <div><span>Magnitudine superficiale</span><code>mu_s</code></div>
+                <div><span>Modulo di distanza</span><code>mu</code></div>
+                <div><span>Differenza di magnitudine</span><code>delta_m</code></div>
+                <div><span>Rapporto di flusso</span><code>flux_ratio</code></div>
+                <div><span>Area angolare apparente</span><code>A_ang</code></div>
+                <div><span>Massa stellare o centrale</span><code>Ms</code></div>
+                <div><span>Massa maggiore</span><code>M1</code></div>
+                <div><span>Massa minore</span><code>M2</code></div>
+                <div><span>Massa corpo minore 1</span><code>m1</code></div>
+                <div><span>Massa corpo minore 2</span><code>m2</code></div>
+                <div><span>Periodo orbitale</span><code>P</code></div>
+                <div><span>Primo periodo</span><code>P1</code></div>
+                <div><span>Secondo periodo</span><code>P2</code></div>
+                <div><span>Periodo sinodico</span><code>P_syn</code></div>
+                <div><span>Semiasse maggiore</span><code>a</code></div>
+                <div><span>Semiasse minore</span><code>b</code></div>
+                <div><span>Distanza focale</span><code>c</code></div>
+                <div><span>Eccentricita</span><code>e</code></div>
+                <div><span>Distanza istantanea dal fuoco</span><code>r</code></div>
+                <div><span>Distanza all'afelio</span><code>r_a</code></div>
+                <div><span>Distanza al perielio</span><code>r_p</code></div>
+                <div><span>Velocita orbitale</span><code>v</code></div>
+                <div><span>Velocita tangenziale</span><code>v_t</code></div>
+                <div><span>Velocita istantanea</span><code>v_i</code></div>
+                <div><span>Velocita angolare</span><code>omega</code></div>
+                <div><span>Velocita radiale</span><code>v_r</code></div>
+                <div><span>Velocita di fuga</span><code>v_escape</code></div>
+                <div><span>Forza gravitazionale</span><code>F_g</code></div>
+                <div><span>Forza centripeta</span><code>F_cp</code></div>
+                <div><span>Forza centrifuga</span><code>F_cf</code></div>
+                <div><span>Raggio stellare</span><code>R</code></div>
+                <div><span>Raggio planetario</span><code>R_p</code></div>
+                <div><span>Raggio di Schwarzschild</span><code>r_s</code></div>
+                <div><span>Redshift</span><code>z</code></div>
+                <div><span>Lunghezza d'onda osservata</span><code>lambda_obs</code></div>
+                <div><span>Lunghezza d'onda a riposo</span><code>lambda_rest</code></div>
+                <div><span>Profondita di transito</span><code>delta_tr</code></div>
+                <div><span>Durata del transito</span><code>T_tr</code></div>
+                <div><span>Alpha</span><code>alpha</code></div>
+                <div><span>Beta</span><code>beta</code></div>
+                <div><span>Gamma</span><code>gamma</code></div>
+                <div><span>Theta</span><code>theta</code></div>
+              </div>
+            </div>
+
+            <div class="legend-card">
+              <h3>Unita di Misura</h3>
+              <div class="legend-list">
+                <div><span>Metri</span><code>m</code></div>
+                <div><span>Chilometri</span><code>km</code></div>
+                <div><span>Unita astronomiche</span><code>AU</code></div>
+                <div><span>Parsec</span><code>pc</code></div>
+                <div><span>Anni luce</span><code>ly</code></div>
+                <div><span>Raggio solare</span><code>R_sun</code></div>
+                <div><span>Raggio terrestre</span><code>R_earth</code></div>
+                <div><span>Raggio gioviano</span><code>R_jup</code></div>
+                <div><span>Secondi</span><code>s</code></div>
+                <div><span>Minuti</span><code>min</code></div>
+                <div><span>Ore</span><code>h</code></div>
+                <div><span>Giorni</span><code>d</code></div>
+                <div><span>Anni</span><code>yr</code></div>
+                <div><span>Kelvin</span><code>K</code></div>
+                <div><span>Gradi Celsius</span><code>degC</code></div>
+                <div><span>Watt</span><code>W</code></div>
+                <div><span>Chilowatt</span><code>kW</code></div>
+                <div><span>Watt per metro quadrato</span><code>W/m^2</code></div>
+                <div><span>Chilogrammi</span><code>kg</code></div>
+                <div><span>Grammi</span><code>g</code></div>
+                <div><span>Massa solare</span><code>M_sun</code></div>
+                <div><span>Massa terrestre</span><code>M_earth</code></div>
+                <div><span>Massa gioviana</span><code>M_jup</code></div>
+                <div><span>Newton</span><code>N</code></div>
+                <div><span>Chilonewton</span><code>kN</code></div>
+                <div><span>Meganewton</span><code>MN</code></div>
+                <div><span>Radianti</span><code>rad</code></div>
+                <div><span>Gradi</span><code>deg</code></div>
+                <div><span>Primi d'arco</span><code>arcmin</code></div>
+                <div><span>Secondi d'arco</span><code>arcsec</code></div>
+                <div><span>Secondi d'arco quadrati</span><code>arcsec^2</code></div>
+                <div><span>Primi d'arco quadrati</span><code>arcmin^2</code></div>
+                <div><span>Magnitudini</span><code>mag</code></div>
+                <div><span>Magnitudine superficiale</span><code>mag/arcsec^2</code></div>
+                <div><span>Metri al secondo</span><code>m/s</code></div>
+                <div><span>Chilometri al secondo</span><code>km/s</code></div>
+                <div><span>Chilometri orari</span><code>km/h</code></div>
+                <div><span>Velocita della luce</span><code>c</code></div>
+                <div><span>Percento</span><code>%</code></div>
+                <div><span>Parti per milione</span><code>ppm</code></div>
+                <div><span>Nanometri</span><code>nm</code></div>
+                <div><span>Angstrom</span><code>A</code></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Motore di risoluzione</h2>
+          </div>
+          <button id="solveBtn" class="primary-button">Risolvi tutto</button>
+        </div>
+
+        <div class="bot-console" id="botConsole">
+          <div class="console-line accent">Pronto. Inserisci dati e incognite, poi avvia il solver.</div>
+        </div>
+
+        <div class="results-card">
+          <h3>Risultati</h3>
+          <div id="resultsContainer" class="results-list empty">Nessun risultato ancora.</div>
+        </div>
+
+        <div class="results-card">
+          <h3>Soluzione commentata</h3>
+          <div id="narrativeContainer" class="narrative-output empty">Quando risolvi un problema, qui compare il testo commentato con le formule utilizzate.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Scientific Core</p>
+            <h2>Calcolatrice scientifica</h2>
+          </div>
+        </div>
+
+        <div class="calculator">
+          <input id="calcDisplay" class="calc-display" type="text" value="0" readonly>
+          <div class="calc-grid">
+            <button data-action="clear">AC</button>
+            <button data-action="backspace">DEL</button>
+            <button data-insert="(">(</button>
+            <button data-insert=")">)</button>
+            <button data-insert="sin(">sin</button>
+            <button data-insert="cos(">cos</button>
+            <button data-insert="tan(">tan</button>
+            <button data-insert="/">/</button>
+            <button data-insert="asin(">arcsin</button>
+            <button data-insert="acos(">arccos</button>
+            <button data-insert="atan(">arctan</button>
+            <button data-insert="^">^</button>
+            <button data-insert="log10(">log</button>
+            <button data-insert="ln(">ln</button>
+            <button data-insert="sqrt(">sqrt</button>
+            <button data-insert="*">*</button>
+            <button data-insert="7">7</button>
+            <button data-insert="8">8</button>
+            <button data-insert="9">9</button>
+            <button data-insert="-">-</button>
+            <button data-insert="4">4</button>
+            <button data-insert="5">5</button>
+            <button data-insert="6">6</button>
+            <button data-insert="+">+</button>
+            <button data-insert="1">1</button>
+            <button data-insert="2">2</button>
+            <button data-insert="3">3</button>
+            <button data-action="scientific">x10^</button>
+            <button data-insert="0">0</button>
+            <button data-insert=".">.</button>
+            <button data-constant="pi">pi</button>
+            <button data-action="evaluate" class="equals">=</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-wide">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Angle & Units</p>
+            <h2>Conversioni angolari e notazione scientifica</h2>
+          </div>
+        </div>
+
+        <div class="conversion-grid">
+          <div class="converter-card">
+            <h3>Da gradi decimali</h3>
+            <label>
+              Gradi
+              <input type="number" id="decimalDegreesInput" placeholder="Es. 23.4375">
+            </label>
+            <button id="convertDegreesBtn" class="secondary-button">Converti</button>
+            <div id="degreeResults" class="conversion-output"></div>
+          </div>
+
+          <div class="converter-card">
+            <h3>Da gradi, primi, secondi</h3>
+            <div class="triple-inputs">
+              <input type="number" id="dmsDeg" placeholder="Gradi">
+              <input type="number" id="dmsMin" placeholder="Primi">
+              <input type="number" id="dmsSec" placeholder="Secondi">
+            </div>
+            <button id="convertDmsBtn" class="secondary-button">Converti</button>
+            <div id="dmsResults" class="conversion-output"></div>
+          </div>
+
+          <div class="converter-card">
+            <h3>Notazione scientifica</h3>
+            <label>
+              Coefficiente
+              <input type="number" id="sciMantissa" placeholder="Es. 6.67">
+            </label>
+            <label>
+              Esponente di 10
+              <input type="number" id="sciExponent" placeholder="-11">
+            </label>
+            <button id="convertScientificBtn" class="secondary-button">Calcola</button>
+            <div id="scientificResults" class="conversion-output"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
